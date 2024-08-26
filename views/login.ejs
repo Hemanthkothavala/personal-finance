@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.192);
+            border-radius: 8px;
+            box-shadow: 10px 10px 20px black;
+            backdrop-filter: blur(4px);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: rgba(255, 255, 255, 0.19);
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            font-size: 20px;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+        .body {
+            background-image: linear-gradient(to right,rgba(0, 0, 0, 0.618),rgba(0, 0, 0, 0.568)),url("./images/1.jpeg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+        input {
+            background-color: rgba(255, 255, 255, 0.226);
+        }
+    </style>
+</head>
+<body class="body">
+    <div class="container">
+        <h1 style="color: white;">Login</h1>
+        <form id="login-form" method="POST" action="/loginsubmit">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <p style="color: white;">Don't have an account? <a href="registration" style="color: yellow;">Register here</a>.
+        </p>
+        <% if (typeof errorMessage !== 'undefined') { %>
+            <p style="color: red;"><%= errorMessage %></p>
+          <% } %>
+    </div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        
+        });
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) {
+                window.location.replace('/login');
+            }
+        });
+</script>
+</html>
