@@ -15,7 +15,7 @@
         }
 
         .body {
-            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.618), rgba(0, 0, 0, 0.568)), url("./images/home.jpeg");
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url("./images/home.jpeg");
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
@@ -23,8 +23,9 @@
 
         
         .customnav{
-            background-color: #ffffff97;
+            background-color: #00000073;
             animation: slide1 1s ease;
+            color: white;
         }
         .card{
             background-color: rgba(255, 255, 255, 0.16);
@@ -43,22 +44,11 @@
             transition: 0.3s ease;
             animation: pulse 2s infinite;
         }
-        
-        @keyframes pulse{
-            0%{
-                transform: scale(1);
-                background-color: rgb(0, 106, 255);
-            }
-            50%{
-                transform: scale(1.2);
-                background-color: #4CAF50;
-            }
-            100%{
-                transform: scale(1);
-                background-color: rgb(0, 106, 255);
-            }
-
+        .btn-primary:hover{
+            transform: scale(1.2);
         }
+        
+        
         .welcome{
             animation: slide 1s ease;
         }
@@ -143,7 +133,7 @@
               <p>Managing expenses is a crucial part of maintaining financial health. At <b>ProfitGuard</b>, we provide you with detailed insights into your spending habits, helping you to identify areas where you can save. Our platform allows you to categorize and track your expenses effortlessly, giving you a clear picture of where your money is going. Whether it's daily expenditures, recurring bills, or one-time purchases, <b>ProfitGuard</b> makes it easy to stay on top of your finances.</p>
               <p>With our expense management tools, you can set budgets, receive alerts when you're close to exceeding your limits, and make adjustments to ensure you’re always within your financial goals. Let <b>ProfitGuard</b> help you take control of your expenses, so you can focus on what matters most.</p>
               
-                    <a href="/government" class="btn btn-primary">Continue</a>                  </div>
+                    <a href="/finance" class="btn btn-primary">Continue</a>                  </div>
         </div>
     </div>
     <div class="container" style="margin-top: 50px;margin-bottom: 50px; background-color: rgba(255, 255, 255, 0.685); padding: 30px; border-radius: 20px;">
@@ -156,7 +146,7 @@
             <p>Tax season doesn’t have to be stressful with <b>ProfitGuard</b>. Our comprehensive tax calculation tools are designed to simplify the process, ensuring you’re always compliant and maximizing your returns. Whether you’re filing personal taxes or handling business tax obligations, our platform provides accurate calculations based on the latest tax laws and regulations.</p>
             <p>With <b>ProfitGuard</b>, you can easily input your income, deductions, and other relevant financial data to get a clear estimate of your tax liability. Our system will guide you through every step, helping you identify potential savings and ensuring that you file with confidence. Trust <b>ProfitGuard</b> to make tax calculation a breeze.</p>
             
-                  <a href="/business" class="btn btn-primary">Continue</a>          </div>
+                  <a href="/tax" class="btn btn-primary">Continue</a>          </div>
       </div>
   </div>
 

@@ -15,7 +15,7 @@
             align-items: center;
             height: 100vh;
             background-attachment: fixed;
-            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.199), rgba(0, 0, 0, 0.116)), url("./images/expen.jpeg");
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.311), rgba(0, 0, 0, 0.223)), url("./images/pro1.jpeg");
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
@@ -115,18 +115,12 @@
         
         .but{
             animation: pulse 2s infinite;
+            transition: 0.3s ease;
         }
-        @keyframes pulse{
-            0%{
-                transform: scale(1);
-            }
-            50%{
-                transform: scale(1.02);
-            }
-            100%{
-                transform: scale(1);
-            }
+        .but:hover{
+            transform: scale(1.03);
         }
+        
     </style>
 </head>
 <body>
@@ -367,38 +361,44 @@
                 amount = amount - tax1;
             }
 
-            let emergency = amount * (15 / 100);
-            const insurance = amount * (5 / 100);
-            const others = amount * (5 / 100);
-            const ltg = amount * (10 / 100);
-            const stg = amount * (10 / 100);
-            let save=amount*(5/100);
+            let emergency = Math.round(amount * (15 / 100));
+            const insurance = Math.round(amount * (5 / 100));
+            const others = Math.round(amount * (5 / 100));
+            const ltg = Math.round(amount * (10 / 100));
+            const stg = Math.round(amount * (10 / 100));
+            let save=Math.round(amount*(5/100));
 
             let invest = 0, emi1 = 0, edu = 0, loan = 0, taxval=0;
             if (investment === "yes") {
-                invest += amount * (30 / 100);
+                invest += Math.round(amount * (30 / 100));
             } else {
-                save += amount * (10 / 100);
-                edu += amount * (10 / 100);
-                emergency += amount * (10 / 100);
+                if(education === "yes"){
+                save += Math.round(amount * (10 / 100));
+                edu += Math.round(amount * (10 / 100));
+                emergency += Math.round(amount * (10 / 100));
+                }
+                else{
+                    save += Math.round(amount * (10 / 100));
+                    emergency += Math.round(amount * (10 / 100));
+                }
             }
 
             if (emi === "yes") {
-                emi1 += amount * (5 / 100);
+                emi1 += Math.round(amount * (5 / 100));
             } else {
-                save += amount * (5 / 100);
+                save += Math.round(amount * (5 / 100));
             }
 
             if (loans === "yes") {
-                loan += amount * (5 / 100);
+                loan += Math.round(amount * (5 / 100));
             } else {
-                save += amount * (5 / 100);
+                save += Math.round(amount * (5 / 100));
             }
 
             if (education === "yes") {
-                edu += amount * (10 / 100);
+                edu += Math.round(amount * (10 / 100));
             } else {
-                save += amount * (10 / 100);
+                save += Math.round(amount * (10 / 100));
             }
             if(tax ==="yes"){
                 taxval+=tax1
@@ -438,17 +438,17 @@
             document.getElementById("stgy").textContent=stg;
             document.getElementById("taxy").textContent=taxval;
 
-            document.getElementById("em").textContent=emergency/12;
-            document.getElementById("im").textContent=invest/12;
-            document.getElementById("edum").textContent=edu/12;
-            document.getElementById("emim").textContent=emi1/12;
-            document.getElementById("loanm").textContent=loan/12;
-            document.getElementById("savem").textContent=save/12;
-            document.getElementById("inm").textContent=insurance/12;
-            document.getElementById("othm").textContent=others/12;
-            document.getElementById("ltgm").textContent=ltg/12;
-            document.getElementById("stgm").textContent=stg/12;
-            document.getElementById("taxm").textContent=taxval/12;
+            document.getElementById("em").textContent=Math.round(emergency/12);
+            document.getElementById("im").textContent=Math.round(invest/12);
+            document.getElementById("edum").textContent=Math.round(edu/12);
+            document.getElementById("emim").textContent=Math.round(emi1/12);
+            document.getElementById("loanm").textContent=Math.round(loan/12);
+            document.getElementById("savem").textContent=Math.round(save/12);
+            document.getElementById("inm").textContent=Math.round(insurance/12);
+            document.getElementById("othm").textContent=Math.round(others/12);
+            document.getElementById("ltgm").textContent=Math.round(ltg/12);
+            document.getElementById("stgm").textContent=Math.round(stg/12);
+            document.getElementById("taxm").textContent=Math.round(taxval/12);
 
             const ctx = document.getElementById('myPieChart').getContext('2d');
             myPieChart = new Chart(ctx, {

@@ -106,6 +106,9 @@
                 </div>
                 
                 <button type="submit">Update Information</button>
+                <% if(typeof errorMessage!=="undefined"){%>
+                    <p style="color: red;"><%= errorMessage %></p>
+                    <%}%>
             </form>
         </div>
 

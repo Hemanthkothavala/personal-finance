@@ -4,6 +4,7 @@ const { initializeApp, cert } = require('firebase-admin/app');
 const { getFirestore } = require('firebase-admin/firestore');
 const serviceAccount = require('./key.json');
 const session = require("express-session");
+const { errors } = require("node-telegram-bot-api/src/telegram");
 
 initializeApp({
   credential: cert(serviceAccount)
@@ -51,7 +52,8 @@ app.post("/registersubmit", (req, res) => {
             if (docs.size > 0) {
               res.render("registration",{errorMessage:"Username already in use"});
             } else {
-              db.collection("users")
+              if(req.body.password.length>=8){
+                db.collection("users")
                 .add({
                   age: req.body.age,
                   annualIncome: req.body.annualIncome,
@@ -64,6 +66,11 @@ app.post("/registersubmit", (req, res) => {
                 .then(() => {
                   res.redirect("/login");
                 });
+              }
+              else{
+                res.render("registration",{errorMessage:"Password must contain atleast 8 characters"});
+              }
+              
             }
           });
       }
@@ -72,7 +79,7 @@ app.post("/registersubmit", (req, res) => {
 
 app.post("/loginsubmit", (req, res) => {
   db.collection("users")
-    .where("name", "==", req.body.name)
+    .where("email", "==", req.body.Email)
     .where("password", "==", req.body.password)
     .get()
     .then((docs) => {
@@ -91,7 +98,7 @@ app.post("/loginsubmit", (req, res) => {
         };
         res.redirect("/home");
       } else {
-        res.render("login", { errorMessage: "Incorrect username or password" });
+        res.render("login", { errorMessage: "Incorrect Email or password" });
         
       }
     });
@@ -117,11 +124,11 @@ app.get("/home", isAuthenticated, (req, res) => {
 app.get("/contact", isAuthenticated, (req, res) => {
   res.render("contact");
 });
-app.get("/business",isAuthenticated,(req,res)=>{
-  res.render("business");
+app.get("/tax",isAuthenticated,(req,res)=>{
+  res.render("tax");
 });
-app.get("/government",isAuthenticated,(req,res)=>{
-  res.render("government");
+app.get("/finance",isAuthenticated,(req,res)=>{
+  res.render("finance");
 });
 app.get("/trading",(req,res)=>{
   res.render("trading");
@@ -134,7 +141,13 @@ app.get("/settings", isAuthenticated, (req, res) => {
 app.post("/updateUserInfo", isAuthenticated, (req, res) => {
   const { name, email, age} = req.body;
   const userId=req.session.userdata.id;
-  db.collection("users")
+  db.collection("users").where("email","==",req.session.userdata.email).get()
+  .then((docs)=>{
+    if(docs.size>0 && docs.docs[0]!==userId){
+      res.render("settings", {errorMessage:"Email already exist"});
+    }
+    else{
+      db.collection("users")
     .doc(userId)
     .update({
       name: name,
@@ -151,6 +164,8 @@ app.post("/updateUserInfo", isAuthenticated, (req, res) => {
       console.error("Error updating user information: ", error);
       res.status(500).send("Error updating user information.");
     });
+    }
+  })
 });
 app.post("/changePassword", isAuthenticated, (req, res) => {
   const { currentPassword, newPassword, confirmPassword } = req.body;
